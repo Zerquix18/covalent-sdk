@@ -1,12 +1,15 @@
 import { CovalentOptions } from "./models";
 import CovalentChains from "./covalent/CovalentChains";
 import CovalentAddress from "./covalent/CovalentAddress";
+import CovalentBlocks from "./covalent/CovalentBlocks";
 
 class Covalent {
   private options: CovalentOptions;
+  private defaultChain: number;
 
-  constructor(options: CovalentOptions) {
+  constructor(options: CovalentOptions, defaultChain: number) {
     this.options = options;
+    this.defaultChain = defaultChain;
   }
 
   getOptions() {
@@ -21,8 +24,12 @@ class Covalent {
     return new CovalentChains(this.options);
   }
 
-  address(address: string, chain: number) {
+  address(address: string, chain = this.defaultChain) {
     return new CovalentAddress(this.options, address, chain);
+  }
+
+  blocks(chain = this.defaultChain) {
+    return new CovalentBlocks(this.options, chain);
   }
 }
 
