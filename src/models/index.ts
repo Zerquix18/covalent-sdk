@@ -1,3 +1,5 @@
+export * from './covalentModels';
+
 export interface CovalentOptions {
   key: string;
   version?: string;
