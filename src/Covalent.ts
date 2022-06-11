@@ -1,5 +1,6 @@
 import { CovalentOptions } from "./models";
 import CovalentChains from "./covalent/CovalentChains";
+import CovalentAddress from "./covalent/CovalentAddress";
 
 class Covalent {
   private options: CovalentOptions;
@@ -18,6 +19,10 @@ class Covalent {
   
   chains() {
     return new CovalentChains(this.options);
+  }
+
+  address(address: string, chain: number) {
+    return new CovalentAddress(this.options, address, chain);
   }
 }
 

@@ -8,7 +8,7 @@ export interface ContractMetadata {
   contract_name: string;
   contract_ticker_symbol: string;
   contract_address: string;
-  supports_erc: string[];
+  supports_erc: string[] | null;
   logo_url: string;
 }
 
@@ -30,7 +30,9 @@ export interface BalanceResponseType {
   updated_at: string;
   next_update_at: string;
   quote_currency: string;
+  chain_id: number;
   items: WalletBalanceItem[];
+  pagination: AppliedPagination | null;
 }
 
 export type INFTMetadata = any; 
@@ -40,13 +42,31 @@ export type AssetType = 'cryptocurrency' | 'stablecoin' | 'nft' | 'dust';
 export interface WalletBalanceItem extends ContractMetadata {
   last_transferred_at: string;
   type: AssetType;
-  balance: number;
-  balance_24h: number;
+  balance: string;
+  balance_24h: string;
+  quote_rate: number | null;
+  quote_rate_24h: number | null;
+  quote: number | null;
+  quote_24h: number | null;
+  nft_data: INFTMetadata[] | null;
+}
+
+export interface HistoricalPortfolioResponseItemTokenBalance {
+  balance: string;
+  quote: number | null;
+}
+
+export interface HistoricalPortfolioResponseItemToken {
+  timestamp: string;
   quote_rate: number;
-  quote_rate_24h: number;
-  quote: number;
-  quote_24h: number;
-  nft_data: INFTMetadata[];
+  open: HistoricalPortfolioResponseItemTokenBalance;
+  high: HistoricalPortfolioResponseItemTokenBalance;
+  low: HistoricalPortfolioResponseItemTokenBalance;
+  close: HistoricalPortfolioResponseItemTokenBalance;
+}
+
+export interface HistoricalPortfolioResponseItem extends ContractMetadata {
+  holdings: HistoricalPortfolioResponseItemToken[];
 }
 
 export interface HistoricalPortfolioResponse {
@@ -55,15 +75,15 @@ export interface HistoricalPortfolioResponse {
   next_update_at: string;
   quote_currency: string;
   chain_id: number;
-  items: string[];
+  items: HistoricalPortfolioResponseItem[];
   pagination: AppliedPagination | null;
 }
 
 export interface AppliedPagination {
-  has_more: number;
+  has_more: boolean;
   page_number: number;
   page_size: number;
-  total_count: number;
+  total_count: number | null;
 }
 
 export interface DecodedParamItem {
@@ -80,7 +100,7 @@ export interface TransactionResponse {
   next_update_at: string;
   quote_currency: string;
   chain_id: number;
-  items: BlockTransactionWithLogEvents;
+  items: BlockTransactionWithLogEvents[];
   pagination: AppliedPagination | null;
 }
 
@@ -110,22 +130,22 @@ export interface LogEventItem {
 export interface BlockTransactionWithLogEvents {
   block_signed_at: string;
   block_height: number;
-  tx_hash: number;
+  tx_hash: string;
   tx_offset: number;
   successful: boolean;
-  from_address: number;
-  from_address_label: string;
-  to_address: number;
-  to_address_number: string;
-  vlaue: number;
+  from_address: string;
+  from_address_label: string | null;
+  to_address: string;
+  to_address_label: string | null;
+  value: string;
   value_quote: number;
   gas_offered: number;
   gas_spent: number;
   gas_price: number;
-  feed_paid: number;
+  fees_paid: number | null;
   gas_quote: number;
   gas_quote_rate: number;
-  log_events: LogEventItem[];
+  transfers: TokenTransferItem;
 }
 
 export interface SingleTransactionResponse {
@@ -154,21 +174,21 @@ export interface TokenTransferItem {
   block_signed_at: string;
   tx_hash: string;
   from_address: string;
-  from_address_label: string;
+  from_address_label: string | null
   to_address: string;
-  to_address_label: string;
+  to_address_label: string | null
   contract_decimals: number;
   contract_name: string;
   contract_ticker_symbol: string;
-  contract_address: number;
+  contract_address: string;
   logo_url: string;
   transfer_type: TokenTransferItemType;
-  delta: number;
-  balance: number;
+  delta: string;
+  balance: string | null;
   quote_rate: number;
   delta_quote: number;
-  balance_quote: number;
-  method_calls: MethodCallsForTransfers[];
+  balance_quote: number | null;
+  method_calls: MethodCallsForTransfers[] | null;
 }
 
 export interface BlockTransactionWithContractTransfers {
@@ -474,9 +494,9 @@ export interface EcosystemResponse {
 }
 
 export interface UniswapLikeEcosystemCharts {
-  dex_name: string
-  chain_id: string
-  quote_currency: string
+  dex_name: string;
+  chain_id: string;
+  quote_currency: string;
   gas_token_price_quote: number
   total_swaps_24h: number;
   total_active_pairs_7d: number;
