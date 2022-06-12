@@ -2,6 +2,7 @@ import { CovalentOptions } from "./models";
 import CovalentChains from "./covalent/CovalentChains";
 import CovalentAddress from "./covalent/CovalentAddress";
 import CovalentBlocks from "./covalent/CovalentBlocks";
+import CovalentTransaction from "./covalent/CovalentTransaction";
 
 class Covalent {
   private options: CovalentOptions;
@@ -30,6 +31,10 @@ class Covalent {
 
   blocks(chain = this.defaultChain) {
     return new CovalentBlocks(this.options, chain);
+  }
+
+  transaction(chain = this.defaultChain) {
+    return new CovalentTransaction(this.options, chain);
   }
 }
 

@@ -91,7 +91,7 @@ export interface DecodedParamItem {
   type: string;
   indexed: boolean;
   decoded: boolean;
-  value: object;
+  value: string;
 }
 
 export interface TransactionResponse {
@@ -100,7 +100,7 @@ export interface TransactionResponse {
   next_update_at: string;
   quote_currency: string;
   chain_id: number;
-  items: BlockTransactionWithLogEvents[];
+  items: BlockTransactionWithContractTransfers[];
   pagination: AppliedPagination | null;
 }
 
@@ -115,16 +115,16 @@ export interface LogEventItem {
   block_height: number;
   tx_offset: number;
   log_offset: number;
-  tx_hash: number;
+  tx_hash: string;
   raw_log_topics: any;
   sender_contract_decimals: number;
   sender_name: string;
   sender_contract_ticker_symbol: string;
   sender_address: string;
-  sender_address_label: string;
+  sender_address_label: string | null;
   sender_logo_url: string;
   raw_log_data: string;
-  decoded: DecodedItem[];
+  decoded: DecodedItem;
 }
 
 export interface BlockTransactionWithLogEvents {
@@ -145,7 +145,7 @@ export interface BlockTransactionWithLogEvents {
   fees_paid: number | null;
   gas_quote: number;
   gas_quote_rate: number;
-  transfers: TokenTransferItem;
+  log_events: LogEventItem[];
 }
 
 export interface SingleTransactionResponse {
@@ -198,18 +198,18 @@ export interface BlockTransactionWithContractTransfers {
   tx_offset: number;
   successful: boolean;
   from_address: string;
-  from_address_label: string;
+  from_address_label: string | null;
   to_address: string;
-  to_address_label: string;
-  value: number;
+  to_address_label: string | null;
+  value: string;
   value_quote: number;
   gas_offered: number;
   gas_spent: number;
   gas_price: number;
-  fees_paid: number;
+  fees_paid: number | null;
   gas_quote: number;
   gas_quote_rate: number;
-  transfers: TokenTransferItem[];
+  transfers: TokenTransferItem;
 }
 
 export interface Block {
