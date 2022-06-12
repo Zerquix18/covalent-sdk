@@ -117,12 +117,12 @@ export interface LogEventItem {
   log_offset: number;
   tx_hash: string;
   raw_log_topics: any;
-  sender_contract_decimals: number;
+  sender_contract_decimals: number | null;
   sender_name: string | null;
   sender_contract_ticker_symbol: string | null;
   sender_address: string;
   sender_address_label: string | null;
-  sender_logo_url: string;
+  sender_logo_url: string | null;
   raw_log_data: string;
   decoded: DecodedItem;
 }
@@ -142,7 +142,7 @@ export interface BlockTransactionWithLogEvents {
   gas_offered: number;
   gas_spent: number;
   gas_price: number;
-  fees_paid: number | null;
+  fees_paid: string | null;
   gas_quote: number;
   gas_quote_rate: number;
   log_events: LogEventItem[];
@@ -290,32 +290,32 @@ export interface UniswapToken {
   quote_rate: number;
 }
 
-export interface TokenHolder {
-  contract_decimals: number;
-  contract_name: string;
-  contract_ticker_symbol: string;
-  contract_address: string;
-  supports_erc: string[];
-  logo_url: string;
-  address: number;
-  balance: number;
-  total_supply: number;
+export interface TokenHolder extends ContractMetadata {
+  address: string;
+  balance: string;
+  total_supply: string;
   block_height: number;
 }
 
 export interface TokenHolderResponse {
-  updated_at: number;
+  updated_at: string;
   items: TokenHolder[];
   pagination: AppliedPagination | null;
 }
 
 export interface TokenHolderDiff {
   token_holder: string;
-  prev_balance: number;
+  prev_balance: string;
   prev_block_height: number;
-  next_balance: number;
+  next_balance: string;
   next_block_height: number;
-  diff: number;
+  diff: string;
+}
+
+export interface TokenHolderDiffResponse {
+  updated_at: string;
+  items: TokenHolderDiff[];
+  pagination: AppliedPagination | null;
 }
 
 export interface TokenV2Volume {
@@ -347,14 +347,8 @@ export interface TokenIdResponseType {
   pagination: AppliedPagination | number;
 }
 
-export interface TokenIdResponse {
-  contract_decimals: number;
-  contract_name: string;
-  contract_ticker_symbol: string;
-  contract_address: string;
-  supports_erc: string[];
-  logo_url: string;
-  token_id: number;
+export interface TokenIdResponse extends ContractMetadata {
+  token_id: string;
 }
 
 export interface UniswapLikeVolumeChartWithQuote {
@@ -444,6 +438,17 @@ export interface NftTransactionsResponse {
 export interface NftTransactionsResponseType {
   updated_at: string;
   items: NftTransactionsResponse[];
+  pagination: AppliedPagination | null;
+}
+
+export interface NftMetadataResponse extends ContractMetadata {
+  type: AssetType;
+  nft_data: INFTMetadata;
+}
+
+export interface NftMetadataResponseType {
+  updated_at: string;
+  items: NftMetadataResponse[];
   pagination: AppliedPagination | null;
 }
 

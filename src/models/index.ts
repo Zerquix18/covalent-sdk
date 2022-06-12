@@ -47,3 +47,20 @@ export interface CovalentChainsBalancesOptions extends CovalentParameters {
 export interface CovalentTransactionOptions extends CovalentParameters, CovalentAPIPaginationParameters {
   'no-logs': boolean;
 }
+
+export interface CovalentTokenHolderOptions extends CovalentParameters, CovalentAPIPaginationParameters {
+  'block-height': 'latest' | number;
+}
+
+export interface CovalentTokenHolderChangesOptions extends CovalentParameters, CovalentAPIPaginationParameters {
+  'starting-block': number;
+  'ending-block': number;
+};
+
+export interface CovalentTokenNftIds extends CovalentParameters, CovalentAPIPaginationParameters {
+
+}
+
+export interface CovalentTokenNftTransactions extends CovalentParameters, CovalentAPIPaginationParameters {
+  
+}

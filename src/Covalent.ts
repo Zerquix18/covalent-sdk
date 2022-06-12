@@ -5,6 +5,7 @@ import CovalentBlocks from "./covalent/CovalentBlocks";
 import CovalentTransaction from "./covalent/CovalentTransaction";
 import CovalentPricing from "./covalent/CovalentPricing";
 import CovalentTopic from "./covalent/CovalentTopics";
+import CovalentToken from "./covalent/CovalentToken";
 
 class Covalent {
   private options: CovalentOptions;
@@ -45,6 +46,10 @@ class Covalent {
 
   topics(topics: string[], chain = this.defaultChain) {
     return new CovalentTopic(this.options, topics, chain);
+  }
+
+  token(token: string, chain = this.defaultChain) {
+    return new CovalentToken(this.options, token, chain);
   }
 }
 
