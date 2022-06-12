@@ -178,7 +178,7 @@ describe('test address', () => {
   it('can get transactions', async () => {
     fetchMock.mockResponseOnce(JSON.stringify(transactionsResponse));
 
-    const transactions = await address.transactions(CONTRACT_ADDRESS);
+    const transactions = await address.tokenTransfers(CONTRACT_ADDRESS);
     expect(fetchMock.mock.calls[0][0]).toEqual('https://api.covalenthq.com/v1/1/address/vitalik.eth/transfers_v2/?contract-address=' + CONTRACT_ADDRESS + '&key=')
     expect(transactions).toStrictEqual(addressTransactions);
   });

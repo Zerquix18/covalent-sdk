@@ -24,7 +24,7 @@ class CovalentChains {
     return result as HistoricalPortfolioResponse;
   }
 
-  async transactions(contract: string) {
+  async tokenTransfers(contract: string) {
     const path = `${this.chain}/address/${this.address}/transfers_v2`;
     const parameters = {
       'contract-address': contract,
