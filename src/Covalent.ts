@@ -3,6 +3,7 @@ import CovalentChains from "./covalent/CovalentChains";
 import CovalentAddress from "./covalent/CovalentAddress";
 import CovalentBlocks from "./covalent/CovalentBlocks";
 import CovalentTransaction from "./covalent/CovalentTransaction";
+import CovalentPricing from "./covalent/CovalentPricing";
 
 class Covalent {
   private options: CovalentOptions;
@@ -35,6 +36,10 @@ class Covalent {
 
   transaction(chain = this.defaultChain) {
     return new CovalentTransaction(this.options, chain);
+  }
+
+  pricing(chain = this.defaultChain) {
+    return new CovalentPricing(this.options, chain);
   }
 }
 
