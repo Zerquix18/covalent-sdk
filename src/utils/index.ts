@@ -32,6 +32,9 @@ export const buildQueryString = (parameters: CovalentParameters): string => {
     if (typeof value === 'number') {
       queryString.set(key, String(value));
     }
+    if (typeof value === 'boolean') {
+      queryString.set(key, value ? '1' : '0');
+    }
     if (value === null) {
       queryString.set(key, 'null');
     }

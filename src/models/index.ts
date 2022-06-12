@@ -6,7 +6,7 @@ export interface CovalentOptions {
 }
 
 export interface CovalentParameters {
-  [key: string]: string | number | null | undefined;
+  [key: string]: string | number | null | undefined | boolean;
 }
 
 export interface CovalentFetchOptions extends CovalentOptions {
@@ -37,4 +37,13 @@ export interface CovalentAPITopicEventsOptions extends CovalentParameters, Coval
   'ending-block': number;
   'secondary-topics'?: string;
   'sender-address'?: string;
+}
+
+export interface CovalentChainsBalancesOptions extends CovalentParameters {
+  nft: boolean;
+  'no-nft-fetch': boolean;
+}
+
+export interface CovalentTransactionOptions extends CovalentParameters, CovalentAPIPaginationParameters {
+  'no-logs': boolean;
 }

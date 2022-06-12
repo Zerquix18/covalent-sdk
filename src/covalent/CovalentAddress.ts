@@ -1,4 +1,4 @@
-import { BalanceResponseType, CovalentOptions, HistoricalPortfolioResponse } from "../models";
+import { BalanceResponseType, CovalentChainsBalancesOptions, CovalentOptions, HistoricalPortfolioResponse } from "../models";
 import { fetchFromCovalent } from "../utils";
 
 class CovalentChains {
@@ -12,9 +12,9 @@ class CovalentChains {
     this.chain = chain;
   }
 
-  async balances() {
+  async balances(parameters?: CovalentChainsBalancesOptions) {
     const path = `${this.chain}/address/${this.address}/balances_v2`;
-    const result = await fetchFromCovalent({ ...this.options, path });
+    const result = await fetchFromCovalent({ ...this.options, path, parameters });
     return result as BalanceResponseType;
   }
 

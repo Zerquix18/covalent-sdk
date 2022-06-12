@@ -16,6 +16,8 @@ describe('test utils', () => {
     expect(buildQueryString({ name: 'covalent', value: 1 })).toBe('name=covalent&value=1');
     expect(buildQueryString({ name: 'covalent', value: null })).toBe('name=covalent&value=null');
     expect(buildQueryString({ name: 'covalent', value: '' })).toBe('name=covalent&value=');
+    expect(buildQueryString({ name: 'covalent', value: false })).toBe('name=covalent&value=0');
+    expect(buildQueryString({ name: 'covalent', value: true })).toBe('name=covalent&value=1');
   });
 
   it('it can call the API with the wrong API key', async () => {

@@ -1,4 +1,4 @@
-import { CovalentOptions, GenericChainInfoDisplay } from "../models";
+import { CovalentOptions, CovalentTransactionOptions, GenericChainInfoDisplay } from "../models";
 import { fetchFromCovalent } from "../utils";
 
 class CovalentTransaction {
@@ -10,9 +10,9 @@ class CovalentTransaction {
     this.chainId = chainId;
   }
 
-  async get(txHash: string) {
+  async get(txHash: string, parameters?: CovalentTransactionOptions) {
     const path = `${this.chainId}/transaction_v2/${txHash}`;
-    const result = await fetchFromCovalent({ ...this.options, path });
+    const result = await fetchFromCovalent({ ...this.options, path, parameters });
     return result as GenericChainInfoDisplay;
   }
 }
