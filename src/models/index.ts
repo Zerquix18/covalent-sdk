@@ -64,3 +64,8 @@ export interface CovalentTokenNftIds extends CovalentParameters, CovalentAPIPagi
 export interface CovalentTokenNftTransactions extends CovalentParameters, CovalentAPIPaginationParameters {
   
 }
+
+export interface CovalentAddressLogEventsOptions extends CovalentParameters, CovalentAPIPaginationParameters {
+  'starting-block': number;
+  'ending-block': number;
+};

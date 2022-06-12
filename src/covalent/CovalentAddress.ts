@@ -1,4 +1,4 @@
-import { BalanceResponseType, CovalentChainsBalancesOptions, CovalentOptions, HistoricalPortfolioResponse } from "../models";
+import { BalanceResponseType, CovalentAddressLogEventsOptions, CovalentChainsBalancesOptions, CovalentOptions, HistoricalPortfolioResponse } from "../models";
 import { fetchFromCovalent } from "../utils";
 
 class CovalentChains {
@@ -30,6 +30,12 @@ class CovalentChains {
       'contract-address': contract,
     };
 
+    const result = await fetchFromCovalent({ ...this.options, path, parameters });
+    return result as HistoricalPortfolioResponse;
+  }
+
+  async logEvents(parameters: CovalentAddressLogEventsOptions) {
+    const path = `${this.chain}/events/address/${this.address}`;
     const result = await fetchFromCovalent({ ...this.options, path, parameters });
     return result as HistoricalPortfolioResponse;
   }

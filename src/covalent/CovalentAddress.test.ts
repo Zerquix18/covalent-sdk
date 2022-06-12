@@ -1,9 +1,15 @@
 import CovalentAddress from './CovalentAddress';
 import fetchMock from "jest-fetch-mock";
-import { BalanceResponseType, HistoricalPortfolioResponse, TransactionResponse } from '../models';
+import { BalanceResponseType, CovalentAddressLogEventsOptions, EventsListResponseType, HistoricalPortfolioResponse, TransactionResponse } from '../models';
 
 fetchMock.enableMocks();
 const address = new CovalentAddress({ key: '' }, 'vitalik.eth', 1);
+const address2 = new CovalentAddress({ key: '' }, '0xc0da01a04c3f3e0be433606045bb7017a7323e38', 1);
+
+const params: CovalentAddressLogEventsOptions = {
+  "starting-block": 12115107,
+  "ending-block": 12240004
+};
 
 const addressBalance: BalanceResponseType = {
   "address":"0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
@@ -129,7 +135,49 @@ const addressTransactions: TransactionResponse = {
     "page_size":100,
     "total_count":null
   }
-}
+};
+
+const logEvents: EventsListResponseType = {
+  "updated_at":"2022-06-12T22:16:06.222635733Z",
+  "items": [
+    {
+      "block_signed_at":"2021-03-26T14:12:45Z",
+      "block_height":12115107,
+      "tx_offset":102,
+      "log_offset":146,
+      "tx_hash":"0x1db1c67a0dcca7746adcaf381773d1462737ac2aa96024e71f343f257ffac584",
+      "raw_log_topics":[
+         "0x877856338e13f63d0c36822ff0ef736b80934cd90574a3a5bc9262c39d217c46"
+      ],
+      "sender_contract_decimals":0,
+      "sender_name":"Compound Governor Alpha",
+      "sender_contract_ticker_symbol":null,
+      "sender_address":"0xc0da01a04c3f3e0be433606045bb7017a7323e38",
+      "sender_address_label":null,
+      "sender_logo_url":"https://logos.covalenthq.com/tokens/1/0xc0da01a04c3f3e0be433606045bb7017a7323e38.png",
+      "raw_log_data":"0x0000000000000000000000000dc1f2633d657122d67735d9606e0b29f5523aef000000000000000000000000000000000000000000000000000000000000002a00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000de3aebf3bb7ea44",
+      "decoded": {
+        "name":"VoteCast",
+        "signature":"VoteCast(address voter, uint256 proposalId, bool support, uint256 votes)",
+        "params":[
+          {
+             "name":"voter",
+             "type":"address",
+             "indexed":false,
+             "decoded":true,
+             "value":"0x0dc1f2633d657122d67735d9606e0b29f5523aef"
+          },
+        ]
+      }
+    }
+  ],
+  "pagination": {
+    "has_more":false,
+    "page_number":0,
+    "page_size":100,
+    "total_count":null
+ }
+};
 
 const balancesResponse = {
   data: addressBalance,
@@ -147,6 +195,13 @@ const portfolioResponse = {
 
 const transactionsResponse = {
   data: addressTransactions,
+  error: false,
+  error_message: null,
+  error_code: null
+};
+
+const logEventsResponse = {
+  data: logEvents,
   error: false,
   error_message: null,
   error_code: null
@@ -181,5 +236,13 @@ describe('test address', () => {
     const transactions = await address.tokenTransfers(CONTRACT_ADDRESS);
     expect(fetchMock.mock.calls[0][0]).toEqual('https://api.covalenthq.com/v1/1/address/vitalik.eth/transfers_v2/?contract-address=' + CONTRACT_ADDRESS + '&key=')
     expect(transactions).toStrictEqual(addressTransactions);
+  });
+
+  it('can get log events', async () => {
+    fetchMock.mockResponseOnce(JSON.stringify(logEventsResponse));
+
+    const result = await address2.logEvents(params);
+    expect(fetchMock.mock.calls[0][0]).toEqual('https://api.covalenthq.com/v1/1/events/address/0xc0da01a04c3f3e0be433606045bb7017a7323e38/?starting-block=12115107&ending-block=12240004&key=')
+    expect(result).toStrictEqual(logEvents);
   });
 });
