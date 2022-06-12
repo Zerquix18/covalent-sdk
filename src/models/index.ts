@@ -21,12 +21,20 @@ export interface CovalentAPIBaseResponse {
   error_code: number | null;
 }
 
-export interface CovalentAPIPricingOptions extends CovalentParameters {
-  from?: string;
-  to?: string;
-  'prices-at-asc'?: string;
+export interface CovalentAPIPaginationParameters {
   'page-number'?: number;
   'page-size'?: number;
 }
 
+export interface CovalentAPIPricingOptions extends CovalentParameters, CovalentAPIPaginationParameters {
+  from?: string;
+  to?: string;
+  'prices-at-asc'?: string;
+}
 
+export interface CovalentAPITopicEventsOptions extends CovalentParameters, CovalentAPIPaginationParameters {
+  'starting-block': number;
+  'ending-block': number;
+  'secondary-topics'?: string;
+  'sender-address'?: string;
+}

@@ -118,8 +118,8 @@ export interface LogEventItem {
   tx_hash: string;
   raw_log_topics: any;
   sender_contract_decimals: number;
-  sender_name: string;
-  sender_contract_ticker_symbol: string;
+  sender_name: string | null;
+  sender_contract_ticker_symbol: string | null;
   sender_address: string;
   sender_address_label: string | null;
   sender_logo_url: string;
