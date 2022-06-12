@@ -53,24 +53,24 @@ describe('test blocks', () => {
   it('can get the latest block', async () => {
     fetchMock.mockResponseOnce(JSON.stringify(latestBlockResponse));
 
-    const balances = await blocks.get('latest');
+    const result = await blocks.get('latest');
     expect(fetchMock.mock.calls[0][0]).toEqual('https://api.covalenthq.com/v1/1/block_v2/latest/?key=')
-    expect(balances).toStrictEqual(block);
+    expect(result).toStrictEqual(block);
   });
 
   it('can get a specific block', async () => {
     fetchMock.mockResponseOnce(JSON.stringify(specificBlockResponse));
 
-    const balances = await blocks.get(14946920);
+    const result = await blocks.get(14946920);
     expect(fetchMock.mock.calls[0][0]).toEqual('https://api.covalenthq.com/v1/1/block_v2/14946920/?key=')
-    expect(balances).toStrictEqual(block);
+    expect(result).toStrictEqual(block);
   });
 
   it('can get blocks in a range', async () => {
     fetchMock.mockResponseOnce(JSON.stringify(rangeResponse));
 
-    const balances = await blocks.between('2021-01-01', '2021-01-03');
+    const result = await blocks.between('2021-01-01', '2021-01-03');
     expect(fetchMock.mock.calls[0][0]).toEqual('https://api.covalenthq.com/v1/1/block_v2/2021-01-01/2021-01-03/?key=')
-    expect(balances).toStrictEqual(range);
+    expect(result).toStrictEqual(range);
   });
 });
