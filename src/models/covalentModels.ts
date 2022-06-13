@@ -32,7 +32,7 @@ export interface BalanceResponseType {
   quote_currency: string;
   chain_id: number;
   items: WalletBalanceItem[];
-  pagination: AppliedPagination | null;
+  pagination?: AppliedPagination | null; /* ? the address one has it, the address one in pools doesn't */
 }
 
 export type INFTMetadata = any; 

@@ -100,3 +100,7 @@ export interface CovalentExchangeTokensOptions extends CovalentParameters, Coval
 export interface CovalentExchangeHealthDataOptions extends CovalentParameters, CovalentAPIPaginationParameters {
 
 }
+
+export interface CovalentExchangeAddressPoolsOptions extends CovalentParameters, CovalentAPIPaginationParameters {
+  tickers: string[];
+}

@@ -1,7 +1,7 @@
 import { BalanceResponseType, CovalentAddressLogEventsOptions, CovalentChainsBalancesOptions, CovalentOptions, EventsListResponseType, HistoricalPortfolioResponse, TransactionResponse } from "../models";
 import { fetchFromCovalent } from "../utils";
 
-class CovalentChains {
+class CovalentAddress {
   private options: CovalentOptions;
   private address: string;
   private chain: number;
@@ -41,4 +41,4 @@ class CovalentChains {
   }
 }
 
-export default CovalentChains;
+export default CovalentAddress;

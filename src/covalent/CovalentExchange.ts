@@ -1,5 +1,6 @@
 import { CovalentDexName, CovalentExchangeHealthDataOptions, CovalentExchangePoolsOptions, CovalentExchangeTokensOptions, CovalentOptions, EcosystemResponse, HealthDataResponse, NetworkExchangeTokenResponse, UniswapLikeExchangeListResponse } from "../models";
 import { fetchFromCovalent } from "../utils";
+import CovalentExchangeAddress from "./exchanges/CovalentExchangeAddress";
 
 class CovalentExchange {
   private options: CovalentOptions;
@@ -40,6 +41,9 @@ class CovalentExchange {
     return result as HealthDataResponse;
   }
 
+  address(address: string) {
+    return new CovalentExchangeAddress(this.options, this.dexName, address, this.chainId);
+  }
 }
 
 export default CovalentExchange;
