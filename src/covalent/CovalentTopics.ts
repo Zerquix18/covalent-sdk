@@ -1,4 +1,4 @@
-import { AddressWithHistoricalPricesItem, CovalentAPITopicEventsOptions, CovalentOptions } from "../models";
+import { AddressWithHistoricalPricesItem, CovalentAPITopicEventsOptions, CovalentOptions, EventsListResponseType } from "../models";
 import { fetchFromCovalent } from "../utils";
 
 class CovalentTopic {
@@ -16,7 +16,7 @@ class CovalentTopic {
     const path = `${this.chainId}/events/topics/${this.topics.join(',')}`;
 
     const result = await fetchFromCovalent({ ...this.options, path, parameters });
-    return result as AddressWithHistoricalPricesItem[];
+    return result as EventsListResponseType;
   }
 }
 

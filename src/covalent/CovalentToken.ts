@@ -1,4 +1,4 @@
-import { CovalentOptions, CovalentTokenHolderChangesOptions, CovalentTokenHolderOptions, CovalentTokenNftIds, CovalentTokenNftTransactions, TokenHolderResponse } from "../models";
+import { CovalentOptions, CovalentTokenHolderChangesOptions, CovalentTokenHolderOptions, CovalentTokenNftIds, CovalentTokenNftTransactions, NftMetadataResponseType, NftTransactionsResponseType, TokenHolderDiffResponse, TokenHolderResponse, TokenIdResponseType } from "../models";
 import { fetchFromCovalent } from "../utils";
 
 class CovalentToken {
@@ -16,35 +16,35 @@ class CovalentToken {
     const path = `${this.chainId}/tokens/${this.token}/token_holders`;
 
     const result = await fetchFromCovalent({ ...this.options, path, parameters });
-    return result as TokenHolderResponse[];
+    return result as TokenHolderResponse;
   }
 
   async holderChanges(parameters: CovalentTokenHolderChangesOptions) {
     const path = `${this.chainId}/tokens/${this.token}/token_holders_changes`;
 
     const result = await fetchFromCovalent({ ...this.options, path, parameters });
-    return result as TokenHolderResponse[];
+    return result as TokenHolderDiffResponse;
   }
 
   async nftTokenIds(parameters?: CovalentTokenNftIds) {
     const path = `${this.chainId}/tokens/${this.token}/nft_token_ids`;
 
     const result = await fetchFromCovalent({ ...this.options, path, parameters });
-    return result as TokenHolderResponse[];
+    return result as TokenIdResponseType;
   }
 
   async nftTransactions(tokenId: string, parameters?: CovalentTokenNftTransactions) {
     const path = `${this.chainId}/tokens/${this.token}/nft_transactions/${tokenId}`;
 
     const result = await fetchFromCovalent({ ...this.options, path, parameters });
-    return result as TokenHolderResponse[];
+    return result as NftTransactionsResponseType;
   }
 
   async nftMetadata(tokenId: string) {
     const path = `${this.chainId}/tokens/${this.token}/nft_metadata/${tokenId}`;
 
     const result = await fetchFromCovalent({ ...this.options, path });
-    return result as TokenHolderResponse[];
+    return result as NftMetadataResponseType;
   }
 }
 
