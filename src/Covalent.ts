@@ -1,4 +1,4 @@
-import { CovalentOptions } from "./models";
+import { CovalentDexName, CovalentOptions } from "./models";
 import CovalentChains from "./covalent/CovalentChains";
 import CovalentAddress from "./covalent/CovalentAddress";
 import CovalentBlocks from "./covalent/CovalentBlocks";
@@ -6,6 +6,7 @@ import CovalentTransaction from "./covalent/CovalentTransaction";
 import CovalentPricing from "./covalent/CovalentPricing";
 import CovalentTopic from "./covalent/CovalentTopics";
 import CovalentToken from "./covalent/CovalentToken";
+import CovalentExchange from "./covalent/CovalentExchange";
 
 class Covalent {
   private options: CovalentOptions;
@@ -50,6 +51,10 @@ class Covalent {
 
   token(token: string, chain = this.defaultChain) {
     return new CovalentToken(this.options, token, chain);
+  }
+
+  exchange(exchange: CovalentDexName, chain = this.defaultChain) {
+    return new CovalentExchange(this.options, exchange, chain);
   }
 }
 
