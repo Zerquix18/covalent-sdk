@@ -6,7 +6,7 @@ export interface CovalentOptions {
 }
 
 export interface CovalentParameters {
-  [key: string]: string | number | null | undefined | boolean;
+  [key: string]: string | number | null | undefined | boolean | string[] | number[];
 }
 
 export interface CovalentFetchOptions extends CovalentOptions {
@@ -69,3 +69,34 @@ export interface CovalentAddressLogEventsOptions extends CovalentParameters, Cov
   'starting-block': number;
   'ending-block': number;
 };
+
+export type CovalentDexName = (
+  'uniswap_v2' |
+  'sushiswap' |
+  'pancakeswap_v2' |
+  'quickswap' |
+  'pangolin' |
+  'spiritswap' |
+  'spookyswap' |
+  'traderjo' |
+  'standard' |
+  'apeswap_v2' |
+  'katana' |
+  'stellaswap' |
+  'beamswap' |
+  string
+);
+
+export interface CovalentExchangePoolsOptions extends CovalentParameters, CovalentAPIPaginationParameters {
+  'contract-addresses'?: string[];
+  'tickers'?: string[];
+}
+
+export interface CovalentExchangeTokensOptions extends CovalentParameters, CovalentAPIPaginationParameters {
+
+}
+
+
+export interface CovalentExchangeHealthDataOptions extends CovalentParameters, CovalentAPIPaginationParameters {
+
+}

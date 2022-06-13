@@ -38,6 +38,9 @@ export const buildQueryString = (parameters: CovalentParameters): string => {
     if (value === null) {
       queryString.set(key, 'null');
     }
+    if (Array.isArray(value)) {
+      queryString.set(key, value.join(','));
+    }
   });
 
   return queryString.toString();

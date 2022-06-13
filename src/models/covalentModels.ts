@@ -322,10 +322,10 @@ export interface TokenV2Volume {
   chain_name: string;
   chain_id: string;
   dex_name: string;
-  contract_address: number;
+  contract_address: string;
   contract_name: string;
-  total_liquidity: number;
-  total_volume_24h: number;
+  total_liquidity: string;
+  total_volume_24h: string;
   logo_url: string;
   contract_ticker_symbol: string;
   contract_decimals: number;
@@ -495,7 +495,7 @@ export interface ExchangeTransactionsResponse {
 export interface EcosystemResponse {
   updated_at: string;
   items: UniswapLikeEcosystemCharts[];
-  pagination: AppliedPagination;
+  pagination: AppliedPagination | null;
 }
 
 export interface UniswapLikeEcosystemCharts {
@@ -506,10 +506,10 @@ export interface UniswapLikeEcosystemCharts {
   total_swaps_24h: number;
   total_active_pairs_7d: number;
   total_fees_24h: number
-  volume_chart_7d: UniswapLikeVolumeEcosystemChart;
-  volume_chart_30d: UniswapLikeVolumeEcosystemChart;
-  liquidity_chart_7d: UniswapLikeLiquidityEcosystemChart;
-  liquidity_chart_30d: UniswapLikeLiquidityEcosystemChart;
+  volume_chart_7d: UniswapLikeVolumeEcosystemChart[];
+  volume_chart_30d: UniswapLikeVolumeEcosystemChart[];
+  liquidity_chart_7d: UniswapLikeLiquidityEcosystemChart[];
+  liquidity_chart_30d: UniswapLikeLiquidityEcosystemChart[];
 }
 
 export interface UniswapLikeVolumeEcosystemChart {
