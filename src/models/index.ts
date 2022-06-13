@@ -102,5 +102,13 @@ export interface CovalentExchangeHealthDataOptions extends CovalentParameters, C
 }
 
 export interface CovalentExchangeAddressPoolsOptions extends CovalentParameters, CovalentAPIPaginationParameters {
-  tickers: string[];
+  tickers?: string[];
+}
+
+export interface CovalentExchangeTokenGetOptions extends CovalentParameters, CovalentAPIPaginationParameters {
+  tickers?: string[];
+}
+
+export interface CovalentExchangeTokenTransactionsOptions extends CovalentParameters, CovalentAPIPaginationParameters {
+
 }

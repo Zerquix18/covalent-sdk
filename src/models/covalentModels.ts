@@ -249,15 +249,15 @@ export interface ExchangeVolumeV2 {
 export interface TokenV2 {
   contract_address: string;
   contract_name: string;
-  volume_in_24h: number;
-  volume_out_24h: number;
+  volume_in_24h: string;
+  volume_out_24h: string;
   quote_rate: number;
-  reserver: number;
-  logo_url: number;
+  reserve: string;
+  logo_url: string;
   contract_ticker_symbol: string;
   contract_decimals: number;
-  volume_in_7d: number;
-  volume_out_7d: number;
+  volume_in_7d: string;
+  volume_out_7d: string;
 }
 
 export interface EventsListResponseType {
@@ -356,10 +356,10 @@ export interface UniswapLikeVolumeChartWithQuote {
   chain_id: string;
   dt: string;
   exchange: string;
-  sum_amount0in: number;
-  sum_amount0out: number;
-  sum_amount1in: number;
-  sum_amount1out: number;
+  sum_amount0in: string;
+  sum_amount0out: string;
+  sum_amount1in: string;
+  sum_amount1out: string;
   volume_quote: number;
   token0_quote_rate: number;
   token1_quote_rate: number;
@@ -385,8 +385,8 @@ export interface UniswapLikeLiquidityChartWithQuote {
   chain_id: string;
   dt: string;
   exchange: string;
-  r0_c: number;
-  r1_c: number;
+  r0_c: string;
+  r1_c: string;
   liquidity_quote: number;
   token0_quote_rate: number;
   token1_quote_rate: number;
@@ -408,7 +408,7 @@ export interface ExchangeVolumeWithVolumeAndLiquidityTimeseries {
   fee_24h_quote: number;
   volume_7d_quote: number;
   annualized_fee: number;
-  total_supply: number;
+  total_supply: string;
   quote_rate: number;
   quote_currency: string;
   block_height: number;
@@ -416,12 +416,12 @@ export interface ExchangeVolumeWithVolumeAndLiquidityTimeseries {
   token_1: TokenV2;
   token0_reserve_quote: number;
   token1_reserve_quote: number;
-  volume_timeseries_7d: UniswapLikeLiquidityChartWithQuote;
-  volume_timeseries_30d: UniswapLikeLiquidityChartWithQuote;
-  liquidity_timeseries_7d: UniswapLikeLiquidityChartWithQuote;
-  liquidity_timeseries_30d: UniswapLikeLiquidityChartWithQuote;
-  price_timeseries_7d: UniswapLikeLiquidityChartWithQuote;
-  price_timeseries_30d: UniswapLikeLiquidityChartWithQuote;
+  volume_timeseries_7d: UniswapLikeVolumeChartWithQuote[];
+  volume_timeseries_30d: UniswapLikeVolumeChartWithQuote[];
+  liquidity_timeseries_7d: UniswapLikeLiquidityChartWithQuote[];
+  liquidity_timeseries_30d: UniswapLikeLiquidityChartWithQuote[];
+  price_timeseries_7d: UniswapLikePriceChartWithQuote[];
+  price_timeseries_30d: UniswapLikePriceChartWithQuote[];
 }
 
 export interface NftTransactionsResponse {
@@ -457,14 +457,14 @@ export interface ExchangeTransaction {
   tx_hash: string;
   act: string;
   address: string;
-  amount_0: number;
-  amount_1: number;
-  amount_0_in: number;
-  amount_1_in: number;
-  amount_0_out: number;
-  amount_1_out: number;
+  amount_0: number | null;
+  amount_1: number | null;
+  amount_0_in: number | string;
+  amount_1_in: number | string;
+  amount_0_out: number | string;
+  amount_1_out: number | string;
   to_address: string;
-  from_address: string;
+  from_address: string | null;
   sender_address: string;
   total_quote: number;
   quote_currency: string;
