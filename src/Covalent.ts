@@ -1,4 +1,4 @@
-import { CovalentDexName, CovalentOptions } from "./models";
+import { CovalentDexName, CovalentExchangeItemResult, CovalentOptions } from "./models";
 import CovalentChains from "./covalent/CovalentChains";
 import CovalentAddress from "./covalent/CovalentAddress";
 import CovalentBlocks from "./covalent/CovalentBlocks";
@@ -7,12 +7,13 @@ import CovalentPricing from "./covalent/CovalentPricing";
 import CovalentTopic from "./covalent/CovalentTopics";
 import CovalentToken from "./covalent/CovalentToken";
 import CovalentExchange from "./covalent/CovalentExchange";
+import { fetchFromCovalent } from "./utils";
 
 class Covalent {
   private options: CovalentOptions;
   private defaultChain: number;
 
-  constructor(options: CovalentOptions, defaultChain: number) {
+  constructor(options: CovalentOptions, defaultChain: number = 1) {
     this.options = options;
     this.defaultChain = defaultChain;
   }
@@ -55,6 +56,13 @@ class Covalent {
 
   exchange(exchange: CovalentDexName, chain = this.defaultChain) {
     return new CovalentExchange(this.options, exchange, chain);
+  }
+
+  async exchanges() {
+    const path = 'xy=k/supported_dexes';
+
+    const result = await fetchFromCovalent({ ...this.options, path });
+    return result as CovalentExchangeItemResult;
   }
 }
 

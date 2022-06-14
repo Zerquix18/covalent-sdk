@@ -571,3 +571,18 @@ export interface GenericChainInfoStatusDisplay {
   synced_block_height: number;
   synced_blocked_signed_at: string;
 }
+
+export interface CovalentExchangeItem {
+  chain_id: string;
+  chain_name: string;
+  dex_name: string;
+  factory_contract_address: string;
+  router_contract_addresses: string[];
+  swap_fee: number;
+}
+
+export interface CovalentExchangeItemResult {
+  updated_at: string;
+  items: CovalentExchangeItem[];
+  pagination: AppliedPagination | null;
+}
