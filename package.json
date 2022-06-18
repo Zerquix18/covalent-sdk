@@ -2,7 +2,7 @@
   "name": "covalent-sdk",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "src/Covalent.js",
   "scripts": {
     "tsc": "tsc",
     "test": "jest"

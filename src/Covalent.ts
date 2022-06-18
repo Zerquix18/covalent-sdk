@@ -66,4 +66,7 @@ class Covalent {
   }
 }
 
+export * from './models';
+export * from './utils';
+export * from './constants';
 export default Covalent;
