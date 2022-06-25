@@ -1,4 +1,4 @@
-import { ChainStatusResponse, CovalentOptions, GenericChainInfoDisplay } from "../models";
+import { AllChainInfoResponse, ChainStatusResponse, CovalentOptions } from "../models";
 import { fetchFromCovalent } from "../utils";
 
 class CovalentChains {
@@ -11,7 +11,7 @@ class CovalentChains {
   async list() {
     const path = 'chains';
     const result = await fetchFromCovalent({ ...this.options, path });
-    return result as GenericChainInfoDisplay;
+    return result as AllChainInfoResponse;
   }
 
   async statuses() {

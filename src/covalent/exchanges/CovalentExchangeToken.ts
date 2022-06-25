@@ -1,7 +1,7 @@
-import { BalanceResponseType, CovalentDexName, CovalentExchangeAddressPoolsOptions, CovalentExchangeTokenGetOptions, CovalentExchangeTokenTransactionsOptions, CovalentOptions, SingleNetworkExchangeTokenResponse, TokenAddressTransactionsResponse, UniswapLikeExchangeListResponse } from "../../models";
+import { CovalentDexName, CovalentExchangeTokenGetOptions, CovalentExchangeTokenTransactionsOptions, CovalentOptions, SingleNetworkExchangeTokenResponse, TokenAddressTransactionsResponse } from "../../models";
 import { fetchFromCovalent } from "../../utils";
 
-class CovalentExchangeAddress {
+class CovalentExchangeToken {
   private options: CovalentOptions;
   private dexName: CovalentDexName;
   private contractAddress: string;
@@ -29,4 +29,4 @@ class CovalentExchangeAddress {
   }
 }
 
-export default CovalentExchangeAddress;
+export default CovalentExchangeToken;
