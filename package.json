@@ -8,8 +8,9 @@
     "test": "jest"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Luis A. Martínez <contact@zerquix18.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/Zerquix18/covalent-sdk",
   "dependencies": {
     "node-fetch": "^2.6.7"
   },
