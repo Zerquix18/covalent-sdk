@@ -7,5 +7,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install modules
       run: npm install
+    - name: Compile TSC
+      run: npm run tsc
     - name: Run tests
       run: npm test
