@@ -8,6 +8,6 @@ jobs:
     - name: Install modules
       run: npm install
     - name: Compile TSC
-      run: npm run tsc
+      run: cd src && npm run tsc
     - name: Run tests
       run: npm test
