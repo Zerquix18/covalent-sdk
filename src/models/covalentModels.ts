@@ -32,12 +32,41 @@ export interface BalanceResponseType {
   quote_currency: string;
   chain_id: number;
   items: WalletBalanceItem[];
-  pagination?: AppliedPagination | null; /* ? the address one has it, the address one in pools doesn't */
+  pagination?: AppliedPagination | null /* ? the address one has it, the address one in pools doesn't */;
 }
 
-export type INFTMetadata = any; 
+export type NFTAttributeType = {
+  display_type?: string;
+  trait_type: string;
+  value: string | number;
+};
 
-export type AssetType = 'cryptocurrency' | 'stablecoin' | 'nft' | 'dust';
+export type INFTMetadata = {
+  token_id: string;
+  token_balance: string | null;
+  token_url: string;
+  supports_erc: string[];
+  token_price_wei: string | null;
+  token_quote_rate_eth: string | null;
+  original_owner: string;
+  external_data: {
+    name: string;
+    description: string | null;
+    image: string;
+    image_256: string;
+    image_512: string;
+    image_1024: string;
+    animation_url: string | null;
+    external_url: string | null;
+    attributes: NFTAttributeType[] | null;
+    owner: string | null;
+  };
+  owner: string | null;
+  owner_address: string;
+  burned: boolean;
+};
+
+export type AssetType = "cryptocurrency" | "stablecoin" | "nft" | "dust";
 
 export interface WalletBalanceItem extends ContractMetadata {
   last_transferred_at: string;
@@ -155,7 +184,7 @@ export interface SingleTransactionResponse {
 }
 
 export interface MethodCallsForTransfers {
-  sender_address: string; 
+  sender_address: string;
   method: string;
 }
 
@@ -168,15 +197,15 @@ export interface TransferResponse {
   pagination: AppliedPagination | null;
 }
 
-export type TokenTransferItemType = 'IN' | 'OUT'; 
+export type TokenTransferItemType = "IN" | "OUT";
 
 export interface TokenTransferItem {
   block_signed_at: string;
   tx_hash: string;
   from_address: string;
-  from_address_label: string | null
+  from_address_label: string | null;
   to_address: string;
-  to_address_label: string | null
+  to_address_label: string | null;
   contract_decimals: number;
   contract_name: string;
   contract_ticker_symbol: string;
@@ -214,7 +243,7 @@ export interface BlockTransactionWithContractTransfers {
 
 export interface Block {
   signed_at: string;
-  height: number,
+  height: number;
 }
 
 export interface SingleBlockResponse {
@@ -226,7 +255,7 @@ export interface SingleBlockResponse {
 export interface UniswapLikeExchangeListResponse {
   updated_at: string;
   items: ExchangeVolumeV2[];
-  pagination: AppliedPagination | null; 
+  pagination: AppliedPagination | null;
 }
 
 export interface ExchangeVolumeV2 {
@@ -479,7 +508,7 @@ export interface AccountAddressTransactionsResponse {
   items: ExchangeTransaction[];
   pagination: AppliedPagination | null;
 }
- 
+
 export interface TokenAddressTransactionsResponse {
   updated_at: string;
   items: ExchangeTransaction[];
@@ -502,10 +531,10 @@ export interface UniswapLikeEcosystemCharts {
   dex_name: string;
   chain_id: string;
   quote_currency: string;
-  gas_token_price_quote: number
+  gas_token_price_quote: number;
   total_swaps_24h: number;
   total_active_pairs_7d: number;
-  total_fees_24h: number
+  total_fees_24h: number;
   volume_chart_7d: UniswapLikeVolumeEcosystemChart[];
   volume_chart_30d: UniswapLikeVolumeEcosystemChart[];
   liquidity_chart_7d: UniswapLikeLiquidityEcosystemChart[];
@@ -531,7 +560,7 @@ export interface UniswapLikeLiquidityEcosystemChart {
 
 export interface HealthData {
   synced_block_height: number;
-  synced_block_signed_at: string
+  synced_block_signed_at: string;
   latest_block_height: number;
   latest_block_signed_at: string;
 }
